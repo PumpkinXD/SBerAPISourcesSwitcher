@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "sberapisourcesswitcher",
+  "version": "${version}",
+
+  "name": "SBerAPISourcesSwitcher",
+  "description": "No description",
+  "authors": [
+    "PumpkinXD"
+  ],
+  "contact": {
+    "homepage": "https://github.com/PumpkinXD/SBerAPISourcesSwitcher",
+    "sources": "https://github.com/PumpkinXD/SBerAPISourcesSwitcher"
+  },
+
+  "license": "GPLV3",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.pumpkinxd.sberapisourcesswitcher.SBerAPISourcesSwitcher"
+    ]
+  },
+  "mixins": [
+    "modid.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.19",
+    "fabric-api": "*",
+    "minecraft": "~1.19.4",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
