@@ -14,7 +14,7 @@
   },
 
   "license": "GPLV3",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/sberapisourcesswitcher/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "sberapisourcesswitcher.mixins.json"
   ],
 
   "depends": {
