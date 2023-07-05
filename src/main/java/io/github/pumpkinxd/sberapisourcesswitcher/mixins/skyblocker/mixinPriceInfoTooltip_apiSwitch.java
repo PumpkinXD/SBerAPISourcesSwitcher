@@ -1,6 +1,7 @@
 package io.github.pumpkinxd.sberapisourcesswitcher.mixins.skyblocker;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -24,14 +25,11 @@ import java.util.zip.GZIPInputStream;
 
 
 @SuppressWarnings("unused")
-
 @Pseudo
 @Mixin(targets="me.xmrvizzy.skyblocker.skyblock.item.PriceInfoTooltip")
-
-
 public class mixinPriceInfoTooltip_apiSwitch {
 
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(mixinPriceInfoTooltip_apiSwitch.class.getName());
 
 
     @Dynamic
@@ -40,13 +38,17 @@ public class mixinPriceInfoTooltip_apiSwitch {
         if(type.matches("lowest bins"))
         {
             try{
-                //String lbinurl="https://hysky.de/api/auctions/lowestbins";//not available in my region now
-                String lbinurl="https://moulberry.codes/lowestbin.json.gz";
+                String lbinurl="https://hysky.de/api/auctions/lowestbins";//Available in my region again, thx to MIIT (and damn you ChinaMobile)
+                //String lbinurl="https://moulberry.codes/lowestbin.json.gz";//NEU source, however it only works with NEU
+                //String lbinurl="https://api.skytils.gg/api/auctions/lowestbins";//skytils source(redirecting to https://lb.tricked.pro/lowestbins)
                 URL apiAddress = new URL(lbinurl);
                 InputStream src = apiAddress.openStream();
                 InputStreamReader reader = new InputStreamReader(lbinurl.contains(".gz") ? new GZIPInputStream(src) : src);
                 cir.setReturnValue(new Gson().fromJson(reader, JsonObject.class));
-            }catch (Throwable e){}
+            }catch (Throwable e){
+                LOGGER.warn("SBerAPISourcesSwitcher failed to download "+type+" from alternative source(s)!",e);
+                cir.setReturnValue(null);
+            }
 
         }
 
